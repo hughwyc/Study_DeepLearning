@@ -32,3 +32,4 @@ print(f'{timer.stop():.5f} sec')
 timer.start()
 d = a + b
 print(f'{timer.stop():.5f} sec')
+
