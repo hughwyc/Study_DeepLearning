@@ -1,6 +1,6 @@
 import time
 import numpy as np
-from matplotlib_inline import backend_inline
+import torch
 from matplotlib import pyplot as plt
 
 
@@ -33,14 +33,22 @@ class Timer:  # @save
         return np.array(self.times).cumsum().tolist()
 
 
-# def use_svg_display():
-#     """使用svg格式在Jupyter中显示绘图
-#
-#     Defined in :numref:`sec_calculus`"""
-#     backend_inline.set_matplotlib_formats('svg')
+def load_array(data_arrays, batch_size, is_train=True):
+    """构造一个PyTorch数据迭代器"""
+    from torch.utils import data
+    dataset = data.TensorDataset(*data_arrays)
+    return data.DataLoader(dataset, batch_size, shuffle=is_train)
 
 
-def set_figsize(figsize=(3.5, 2.5)):
+def synthetic_data(w, b, num_examples):
+    """生成y=Xw+b+噪声"""
+    X = torch.normal(0, 1, (num_examples, len(w)))
+    y = torch.matmul(X, w) + b
+    y += torch.normal(0, 0.01, y.shape)
+    return X, y.reshape((-1, 1))
+
+
+def set_figsize(figsize=(10, 6)):
     """设置matplotlib的图表大小
 
     Defined in :numref:`sec_calculus`"""

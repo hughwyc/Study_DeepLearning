@@ -16,6 +16,9 @@
 
 # 在高斯噪声的假设下，最小化均方误差等价于对线性模型的极大似然估计。
 
+# 线性回归是一个单层的神经网络
+# o=wx+b
+
 import math
 import numpy as np
 import torch
