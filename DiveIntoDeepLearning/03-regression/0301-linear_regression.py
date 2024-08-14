@@ -17,11 +17,7 @@
 import math
 import numpy as np
 import torch
-
-import sys
-
-sys.path.append("..")
-from utils.tools import Timer
+from tools import *
 
 n = 10000
 a = torch.ones([n])
